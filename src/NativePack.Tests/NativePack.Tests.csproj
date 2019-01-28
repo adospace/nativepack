@@ -12,9 +12,12 @@
     <Compile Remove="Resources\Class3.cs" />
     <Compile Remove="Resources\Class4.cs" />
     <Compile Remove="Resources\Class4_TestCode.cs" />
+    <Compile Remove="Resources\Class5.cs" />
+    <Compile Remove="Resources\Class5_TestCode.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Class5_TestCode.cs" />
     <EmbeddedResource Include="Resources\Class4_TestCode.cs" />
   </ItemGroup>
 
@@ -23,6 +26,7 @@
     <EmbeddedResource Include="Resources\Class2.cs" />
     <EmbeddedResource Include="Resources\Class4.cs" />
     <EmbeddedResource Include="Resources\Class3.cs" />
+    <EmbeddedResource Include="Resources\Class5.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NativePack.Attributes\NativePack.Attributes.csproj" />
     <ProjectReference Include="..\NativePack\NativePack.csproj" />
   </ItemGroup>
 

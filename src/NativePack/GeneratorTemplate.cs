@@ -47,37 +47,38 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization;
+using NativePack.Attributes;
 
 ");
             
-            #line 21 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 22 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
  foreach (var classDefinition in ClassDefinitions) { 
             
             #line default
             #line hidden
             
-            #line 22 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 23 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.HasNamespace ? $"namespace {classDefinition.Namespace}" : ""));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 23 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 24 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.HasNamespace ? "{" : ""));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n    ");
             
-            #line 25 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 26 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.Modifier));
             
             #line default
             #line hidden
             this.Write(" class ");
             
-            #line 25 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 26 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.Name));
             
             #line default
@@ -100,20 +101,20 @@ using System.Runtime.Serialization;
 
             ");
             
-            #line 41 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
- foreach (var property in classDefinition.Properties) { 
+            #line 42 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+ foreach (var property in classDefinition.Members) { 
             
             #line default
             #line hidden
             
-            #line 42 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GenerateReaderForProperty(property)));
+            #line 43 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.GenerateDeserializerCode()));
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 43 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 44 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
  } 
             
             #line default
@@ -133,20 +134,20 @@ using System.Runtime.Serialization;
 
             ");
             
-            #line 57 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
- foreach (var property in classDefinition.Properties) { 
+            #line 58 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+ foreach (var property in classDefinition.Members) { 
             
             #line default
             #line hidden
             
-            #line 58 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GenerateWriterForProperty(property)));
+            #line 59 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.GenerateSerializerCode()));
             
             #line default
             #line hidden
             this.Write("\r\n            ");
             
-            #line 59 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 60 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
  } 
             
             #line default
@@ -154,7 +155,7 @@ using System.Runtime.Serialization;
             this.Write("\r\n            OnEndSerialize();\r\n        }\r\n\r\n        public static void Serializ" +
                     "e(");
             
-            #line 64 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 65 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.Name));
             
             #line default
@@ -172,7 +173,7 @@ using System.Runtime.Serialization;
 
         public static ");
             
-            #line 75 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 76 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.Name));
             
             #line default
@@ -181,7 +182,7 @@ using System.Runtime.Serialization;
                     "    {\r\n                throw new ArgumentNullException(nameof(stream));\r\n       " +
                     "     }\r\n\r\n            var newEntity = new ");
             
-            #line 82 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 83 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.Name));
             
             #line default
@@ -190,14 +191,14 @@ using System.Runtime.Serialization;
                     "ult))\r\n                newEntity.Deserialize(binaryReader);\r\n            return " +
                     "newEntity;\r\n        }\r\n    \r\n    }\r\n\r\n");
             
-            #line 90 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 91 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classDefinition.HasNamespace ? "}" : ""));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 91 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
+            #line 92 "D:\Source\Projects\nativepack\src\NativePack\GeneratorTemplate.tt"
  } 
             
             #line default

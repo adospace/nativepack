@@ -90,8 +90,9 @@ namespace NativePack
                     var classDefinition = new ClassDefinition(
                         classDeclaration.Identifier.Text,
                         string.Join(" ", classDeclaration.Modifiers.Select(_=>_.Text)),
-                        classDeclaration.ContainingNamespace()
-                        
+                        classDeclaration.ContainingNamespace(),
+                        includeTypeName: classDeclaration.IncludeTypeName(),
+                        callBaseSerializer: classDeclaration.CallBaseSerializer()
                         );
 
                     var properties = classDeclaration.DescendantNodes()
@@ -100,10 +101,20 @@ namespace NativePack
 
                     foreach (var property in properties)
                     {
-                        if (ValueTypeMemberDefintion.TryParse(property.Identifier.Text, property.Type.ToString(), out var defintion))
-                            classDefinition.Properties.Add(defintion);
+                        if (property.IsEnum())
+                        {
+                            if (EnumPropertyDefinition.TryParse(property.Identifier.Text, property.Type.ToString(), out var defintion))
+                                classDefinition.Members.Add(defintion);
+                            else 
+                                throw new InvalidOperationException("");
+                        }
                         else
-                            throw new InvalidOperationException("");
+                        {
+                            if (ValueTypeMemberDefintion.TryParse(property.Identifier.Text, property.Type.ToString(), out var defintion))
+                                classDefinition.Members.Add(defintion);
+                            else
+                                throw new InvalidOperationException("");
+                        }
                     }
 
                     var fields = classDeclaration.DescendantNodes()
@@ -115,7 +126,7 @@ namespace NativePack
                         foreach (var variable in field.Declaration.Variables)
                         {
                             if (ValueTypeMemberDefintion.TryParse(variable.Identifier.Text, field.Declaration.Type.ToString(), out var defintion))
-                                classDefinition.Properties.Add(defintion);
+                                classDefinition.Members.Add(defintion);
                             else
                                 throw new InvalidOperationException("");
                         }

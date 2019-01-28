@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativePack", "NativePack\NativePack.csproj", "{D51891DB-BB13-4CF9-868B-F09881F22925}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativePack.Tests", "NativePack.Tests\NativePack.Tests.csproj", "{2DEDF722-2A1A-4E55-9582-C43B1522F8EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativePack.Tests", "NativePack.Tests\NativePack.Tests.csproj", "{2DEDF722-2A1A-4E55-9582-C43B1522F8EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativePack.Attributes", "NativePack.Attributes\NativePack.Attributes.csproj", "{A9A60676-D899-4A40-9420-0BB389A112AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2DEDF722-2A1A-4E55-9582-C43B1522F8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DEDF722-2A1A-4E55-9582-C43B1522F8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DEDF722-2A1A-4E55-9582-C43B1522F8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9A60676-D899-4A40-9420-0BB389A112AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A60676-D899-4A40-9420-0BB389A112AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A60676-D899-4A40-9420-0BB389A112AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A60676-D899-4A40-9420-0BB389A112AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -44,7 +44,7 @@ namespace NativePack.Tests
 
 
         [TestMethod]
-        public async Task EvaluateSerializer()
+        public async Task GenerateWithPrimitiveProperties()
         {
             var generator = new Generator(GeneratorOptions.Empty);
 
@@ -57,7 +57,32 @@ namespace NativePack.Tests
             try
             {
                 res = await CSharpScript.EvaluateAsync<bool>(generatedCode + sourceCode + Resources.Files.Class4_TestCode(),
-                    ScriptOptions.Default.WithReferences(typeof(System.Runtime.Serialization.DataContractAttribute).Assembly));
+                    ScriptOptions.Default.WithReferences(typeof(Attributes.GenerateSerializer).Assembly));
+            }
+            catch (Microsoft.CodeAnalysis.Scripting.CompilationErrorException e)
+            {
+                Debug.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                Assert.Fail();
+            }
+
+            Assert.IsTrue(res);
+        }
+
+        [TestMethod]
+        public async Task GenerateWithEnums()
+        {
+            var generator = new Generator(GeneratorOptions.Empty);
+
+            var sourceCode = Resources.Files.Class5();
+            var generatedCode = generator.GenerateSerializerCode(Resources.Files.Class5());
+
+            Assert.IsNotNull(generatedCode);
+
+            bool res = false;
+            try
+            {
+                res = await CSharpScript.EvaluateAsync<bool>(generatedCode + sourceCode + Resources.Files.Class5_TestCode(),
+                    ScriptOptions.Default.WithReferences(typeof(Attributes.GenerateSerializer).Assembly));
             }
             catch (Microsoft.CodeAnalysis.Scripting.CompilationErrorException e)
             {

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization;
+using NativePack.Attributes;
 
 <# foreach (var classDefinition in ClassDefinitions) { #>
 <#= classDefinition.HasNamespace ? $"namespace {classDefinition.Namespace}" : "" #>
@@ -39,7 +40,7 @@ using System.Runtime.Serialization;
             OnBeginDeserialize();
 
             <# foreach (var property in classDefinition.Properties) { #>
-<#= GenerateReaderForProperty(property) #>
+<#= property.GenerateDeserializerCode() #>
             <# } #>
 
             OnEndDeserialize();
@@ -55,7 +56,7 @@ using System.Runtime.Serialization;
             OnBeginSerialize();
 
             <# foreach (var property in classDefinition.Properties) { #>
-<#= GenerateWriterForProperty(property) #>
+<#= property.GenerateSerializerCode() #>
             <# } #>
 
             OnEndSerialize();

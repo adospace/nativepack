@@ -5,86 +5,86 @@ using System.Text;
 
 namespace NativePack.Tests.Resources
 {
-    [DataContract]
+    [GenerateSerializer]
     public partial class Class3
     {
 
-        [DataMember]
+        [GenerateSerializer]
         public int PropertyInt1 { get; private set; }
 
-        [DataMember]
+        [GenerateSerializer]
         public int? PropertyInt2 { get; set; }
 
-        [DataMember]
+        [GenerateSerializer]
         int _fieldInt3 = 0;
 
-        [DataMember]
+        [GenerateSerializer]
         int? _fieldInt4 = 0;
 
-        [DataMember]
+        [GenerateSerializer]
         public bool Property1 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Boolean? Property2 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public byte Property3 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Byte? Property4 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public char Property5 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Char? Property6 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
 
         public double Property7 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Double? Property8 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public float Property9 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Single? Property10 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public Int32 Property11 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Int32? Property12 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public long Property13 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Int64? Property14 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public sbyte Property15 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.SByte? Property16 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public short Property17 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Int16? Property18 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public uint Property19 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.UInt32? Property20 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public ulong Property21 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.UInt64? Property22 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public ushort Property23 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.UInt16? Property24 { get; }
 
-        [DataMember]
+        [GenerateSerializer]
         public decimal Property25 { get; }
-        [DataMember]
+        [GenerateSerializer]
         public System.Decimal? Property26 { get; }
 
 

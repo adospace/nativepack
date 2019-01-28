@@ -58,5 +58,7 @@ namespace NativePack.Model
         UInt64 = 14,
 
         Struct = 15,
+
+        String = 16
     }
 }

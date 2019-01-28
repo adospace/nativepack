@@ -1,11 +1,11 @@
 ﻿
-[DataContract]
+[GenerateSerializer]
 public partial class Class4
 {
-    [DataMember]
+    [GenerateSerializer]
     public bool PropertyInt1 { get; set; }
 
-    [DataMember]
+    [GenerateSerializer]
     public int PropertyInt2 { get; set; }
 }
 

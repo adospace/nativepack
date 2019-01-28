@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NativePack.Tests.Resources
 {
-    [System.Runtime.Serialization.DataContract]
+    [GenerateSerializer]
     partial class Class2
     {
     }
