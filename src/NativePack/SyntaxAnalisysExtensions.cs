@@ -47,7 +47,7 @@ namespace NativePack
         }
 
         public static AttributeArgumentSyntax GetArgument(this AttributeSyntax attribute, string name) =>
-            attribute.ArgumentList.DescendantNodes().OfType<AttributeArgumentSyntax>().FirstOrDefault(_ => _.NameColon.Name.Identifier.Text == name);
+            attribute.ArgumentList?.DescendantNodes().OfType<AttributeArgumentSyntax>().FirstOrDefault(_ => _.NameColon.Name.Identifier.Text == name);
 
         public static bool IsTrue(this AttributeArgumentSyntax attributeArgument) =>
             attributeArgument.Expression.Kind() == Microsoft.CodeAnalysis.CSharp.SyntaxKind.TrueLiteralExpression;

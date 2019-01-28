@@ -13,6 +13,8 @@ namespace NativePack.Tests.Resources
         public static string Class4_TestCode() => GetFileContent("Class4_TestCode.cs");
         public static string Class5() => GetFileContent("Class5.cs");
         public static string Class5_TestCode() => GetFileContent("Class5_TestCode.cs");
+        public static string Class6() => GetFileContent("Class6.cs");
+        public static string Class6_TestCode() => GetFileContent("Class6_TestCode.cs");
 
         public static string GetFileContent(string resourceName)
         {

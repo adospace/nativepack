@@ -110,8 +110,14 @@ namespace NativePack
                         }
                         else
                         {
-                            if (ValueTypeMemberDefintion.TryParse(property.Identifier.Text, property.Type.ToString(), out var defintion))
-                                classDefinition.Members.Add(defintion);
+                            if (ValueTypeMemberDefinition.TryParse(property, out var valueTypeMemberDefinition))
+                            {
+                                classDefinition.Members.Add(valueTypeMemberDefinition);
+                            }
+                            else if (ListMemberDefinition.TryParse(property, out var listMemberDefinition))
+                            {
+                                classDefinition.Members.Add(listMemberDefinition);
+                            }
                             else
                                 throw new InvalidOperationException("");
                         }
@@ -125,7 +131,7 @@ namespace NativePack
                     {
                         foreach (var variable in field.Declaration.Variables)
                         {
-                            if (ValueTypeMemberDefintion.TryParse(variable.Identifier.Text, field.Declaration.Type.ToString(), out var defintion))
+                            if (ValueTypeMemberDefinition.TryParse(variable.Identifier.Text, field.Declaration.Type.ToString(), out var defintion))
                                 classDefinition.Members.Add(defintion);
                             else
                                 throw new InvalidOperationException("");

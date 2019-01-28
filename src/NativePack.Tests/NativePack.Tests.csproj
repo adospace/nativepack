@@ -14,9 +14,13 @@
     <Compile Remove="Resources\Class4_TestCode.cs" />
     <Compile Remove="Resources\Class5.cs" />
     <Compile Remove="Resources\Class5_TestCode.cs" />
+    <Compile Remove="Resources\Class6.cs" />
+    <Compile Remove="Resources\Class6_TestCode.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Class6_TestCode.cs" />
+    <EmbeddedResource Include="Resources\Class6.cs" />
     <EmbeddedResource Include="Resources\Class5_TestCode.cs" />
     <EmbeddedResource Include="Resources\Class4_TestCode.cs" />
   </ItemGroup>

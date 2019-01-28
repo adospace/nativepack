@@ -92,6 +92,31 @@ namespace NativePack.Tests
 
             Assert.IsTrue(res);
         }
+
+        [TestMethod]
+        public async Task GenerateWithLists()
+        {
+            var generator = new Generator(GeneratorOptions.Empty);
+
+            var sourceCode = Resources.Files.Class6();
+            var generatedCode = generator.GenerateSerializerCode(Resources.Files.Class6());
+
+            Assert.IsNotNull(generatedCode);
+
+            bool res = false;
+            try
+            {
+                res = await CSharpScript.EvaluateAsync<bool>(generatedCode + sourceCode + Resources.Files.Class6_TestCode(),
+                    ScriptOptions.Default.WithReferences(typeof(Attributes.GenerateSerializer).Assembly));
+            }
+            catch (Microsoft.CodeAnalysis.Scripting.CompilationErrorException e)
+            {
+                Debug.WriteLine(string.Join(Environment.NewLine, e.Diagnostics));
+                Assert.Fail();
+            }
+
+            Assert.IsTrue(res);
+        }
     }
 }
 
