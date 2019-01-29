@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NativePack.Attributes\NativePack.Attributes.csproj" />
+    <ProjectReference Include="..\NativePack.Runtime\NativePack.Runtime.csproj" />
     <ProjectReference Include="..\NativePack\NativePack.csproj" />
   </ItemGroup>
 

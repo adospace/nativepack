@@ -24,10 +24,9 @@ namespace NativePack.Runtime
 
             var typeValue = value.GetType();
             if (typeValue.GetCustomAttribute(typeof(SerializableAttribute)) == null)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"Type '{typeValue.FullName}' is not marked with the Serializable attribute");
 
-            context.Writer.Write(typeValue.FullName);
-            Serialize(context, value);
+            context.Writer.Write(typeValue.AssemblyQualifiedName);
 
             if (typeValue.GetCustomAttribute(typeof(SerializableAttribute)) == null)
                 throw new InvalidOperationException();
