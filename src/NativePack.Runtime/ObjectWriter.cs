@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Reflection;
 
 namespace NativePack.Runtime
 {
-    public class ObjectWriter
+    internal class ObjectWriter
     {
         public ObjectWriter()
         {
         }
 
-        public void Serialize(SerializerContext context, object value)
+        public void Serialize(SerializerContext context, object value, Type candidateType = null)
         {
             if (context == null)
             {
@@ -26,7 +27,15 @@ namespace NativePack.Runtime
             if (typeValue.GetCustomAttribute(typeof(SerializableAttribute)) == null)
                 throw new InvalidOperationException($"Type '{typeValue.FullName}' is not marked with the Serializable attribute");
 
-            context.Writer.Write(typeValue.AssemblyQualifiedName);
+            if (candidateType != null)
+            {
+                context.Writer.Write(typeValue != candidateType ? (byte)1 : (byte)0);
+            }
+
+            if (typeValue != candidateType)
+            {
+                context.Writer.Write(typeValue.AssemblyQualifiedName);
+            }
 
             if (typeValue.GetCustomAttribute(typeof(SerializableAttribute)) == null)
                 throw new InvalidOperationException();
@@ -47,7 +56,12 @@ namespace NativePack.Runtime
             if (propertyValue == null)
                 return;
 
-            switch (propertyValue)
+            SerializeCore(context, propertyValue, propertyValue.GetType());
+        }
+
+        private void SerializeCore(SerializerContext context, object value, Type typeOfValue)
+        {
+            switch (value)
             {
                 #region Primitive Types
                 case byte v:
@@ -95,14 +109,48 @@ namespace NativePack.Runtime
                 case string v:
                     context.Writer.Write(v);
                     return;
-                #endregion
+                    #endregion
             }
 
-            #region IEnumerable
+            if (typeOfValue.IsEnum)
+            {
+                context.Writer.Write((int)value);
+                return;
+            }
 
+            #region IList
+            if (value is IList)
+            {
+                var list = value as IList;
+                context.Writer.Write((byte)1);
+                context.Writer.Write(typeOfValue.AssemblyQualifiedName);
+
+                Type currentItemType = null;
+                context.Writer.Write(list.Count);
+                foreach (var listItem in list)
+                {
+                    context.Writer.Write(listItem != null ? (byte)1 : (byte)0);
+                    if (listItem == null)
+                        continue;
+                    var itemType = listItem.GetType();
+                    context.Writer.Write(itemType != currentItemType ? (byte)1 : (byte)0);
+                    if (currentItemType != itemType)
+                    {
+                        currentItemType = itemType;
+                        context.Writer.Write(currentItemType.AssemblyQualifiedName);
+                    }
+
+                    SerializeCore(context, listItem, itemType);
+                }
+
+
+                return;
+            }
             #endregion
 
-            Serialize(context, propertyValue);
+            context.Writer.Write((byte)0);
+
+            Serialize(context, value, typeOfValue);
         }
     }
 }
